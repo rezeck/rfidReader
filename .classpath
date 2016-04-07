@@ -3,6 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="examples"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry exported="true" kind="lib" path="/home/rezeck/Dropbox/Universidade Federal de Minas Gerais/Cursos/Internet das Coisas/TP1_RFID_DevKit/Software APIs/Java/jars/AlienRFID.jar"/>
+	<classpathentry kind="lib" path="lib/AlienRFID.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
