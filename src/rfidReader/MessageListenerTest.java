@@ -38,6 +38,9 @@ public MessageListenerTest() throws Exception {
 
   // Instantiate a new reader object, and open a connection to it on COM1
   AlienClass1Reader reader = new AlienClass1Reader("COM1");
+  reader.setConnection("150.164.10.42", 23);
+  reader.setUsername("alien");
+  reader.setPassword("password");
   reader.open();
   System.out.println("Configuring Reader");
 
@@ -45,7 +48,9 @@ public MessageListenerTest() throws Exception {
   // Use this host's IPAddress, and the port number that the service is listening on.
   // getHostAddress() may find a wrong (wireless) Ethernet interface, so you may
   // need to substitute your computers IP address manually.
-  reader.setNotifyAddress(InetAddress.getLocalHost().getHostAddress(), service.getListenerPort());
+
+  //reader.setNotifyAddress(InetAddress.getLocalHost().getHostAddress(), service.getListenerPort());
+  reader.setNotifyAddress("150.164.0.233", 4000);
   reader.setNotifyFormat(AlienClass1Reader.XML_FORMAT); // Make sure service can decode it.
   reader.setNotifyTrigger("TrueFalse"); // Notify whether there's a tag or not
   reader.setNotifyMode(AlienClass1Reader.ON);

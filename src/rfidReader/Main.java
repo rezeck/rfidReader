@@ -11,7 +11,7 @@ public class Main {
 	public Main() throws AlienReaderException {
 
 		  AlienClass1Reader reader = new AlienClass1Reader();
-		  reader.setConnection("COM1");
+		  //reader.setConnection("COM1");
 
 		  // To connect to a networked reader instead, use the following:
 		
@@ -19,15 +19,12 @@ public class Main {
 		  reader.setUsername("alien");
 		  reader.setPassword("password");
 		
-/* 
- * Leitor Alien ALR9650: 150.164.10.41 (alien9650.winet.dcc.ufmg.br) Porta 23
- * Leitor Alien ALR9900: 150.164.10.42 (alien9900.winet.dcc.ufmg.br) Porta 23
- * 
- */
-		  // Open a connection to the reader
+		  // Leitor Alien ALR9650: 150.164.10.41 (alien9650.winet.dcc.ufmg.br) Porta 23
+		  // Leitor Alien ALR9900: 150.164.10.42 (alien9900.winet.dcc.ufmg.br) Porta 23
+		  
+ 		  // Open a connection to the reader
 		  reader.open();
 
-		  // Ask the reader to read tags and print them
 		  Tag tagList[] = reader.getTagList();
 		  if (tagList == null) {
 		    System.out.println("No Tags Found");
