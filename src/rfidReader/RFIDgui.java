@@ -15,6 +15,8 @@ import javax.swing.JList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.lang.System;
+import java.net.Inet4Address;
+import java.net.InetAddress;
 
 import com.alien.enterpriseRFID.notify.Message;
 import com.alien.enterpriseRFID.notify.MessageListener;
@@ -29,12 +31,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class RFIDgui implements MessageListener{
+	
+	private String ipAddress;
 
 	private JFrame frame;
 	private AlienClass1Reader reader = new AlienClass1Reader();
 	private MessageListenerService service = new MessageListenerService(4000);
 	String listTag[] = new String[]{};
-	
 
 	/**
 	 * Launch the application.
@@ -56,6 +59,9 @@ public class RFIDgui implements MessageListener{
 	 * Create the application.
 	 */
 	public RFIDgui() throws AlienReaderException, Exception{
+		InetAddress localHost = Inet4Address.getLocalHost();
+		this.ipAddress = localHost.getHostName();
+
 		alienReaderInitialize();
 		initialize();
 	}
@@ -71,12 +77,14 @@ public class RFIDgui implements MessageListener{
 	    System.out.println("(No Tags)");
 	  } else {
 		listTag = new String[message.getTagCount()];
+		
 	    for (int i = 0; i < message.getTagCount(); i++) {
 	      Tag tag = message.getTag(i);
-	      listTag[i] = tag.toLongString();
+	      listTag[i] = tag.toLongString() + "ok";
+	      System.out.println("Read rate: " + tag.getRenewCount() + "/sec");
 	      //System.out.println(tag.toLongString());
+	      System.out.println();
 	    }
-	    
 	  }
 	}
 	
@@ -180,7 +188,7 @@ public class RFIDgui implements MessageListener{
 						reader.open();
 
 						// Setup with your ip address
-						reader.setNotifyAddress("150.164.0.229", 4000);
+						reader.setNotifyAddress(ipAddress, 4000);
 						reader.setNotifyFormat(AlienClass1Reader.XML_FORMAT); // Make sure service can decode it.
 						reader.setNotifyTrigger("TrueFalse"); // Notify whether there's a tag or not
 						reader.setNotifyMode(AlienClass1Reader.ON);
@@ -220,7 +228,8 @@ public class RFIDgui implements MessageListener{
 		btnReadAutonomous.setBounds(326, 20, 300, 25);
 		frame.getContentPane().add(btnReadAutonomous);
 		
-		/*listRFIDSingle.addMouseListener(new MouseAdapter() {
+		/*
+		listRFIDSingle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Tag tag = listRFIDSingle.getSelectedValue();
@@ -234,7 +243,8 @@ public class RFIDgui implements MessageListener{
 				
 				JOptionPane.showMessageDialog(null, list);
 			}
-		});*/
+		});
+		*/
 		
 		frame.setBounds(100, 100, 640, 480);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
