@@ -65,7 +65,7 @@ public class RFIDgui implements MessageListener{
 	 */
 	public RFIDgui() throws AlienReaderException, Exception{
 		InetAddress localHost = Inet4Address.getLocalHost();
-		this.ipAddress = localHost.getHostName();
+		this.ipAddress = localHost.getHostAddress();
 		System.out.println(this.ipAddress);
 		alienReaderInitialize();
 		initialize();
@@ -88,6 +88,7 @@ public class RFIDgui implements MessageListener{
 	      listTag[i] = tag.toLongString() + "ok";
 	      System.out.println("Read rate: " + tag.getRenewCount() + "/sec");
 	      readValue.setText(""+tag.getRenewCount());
+	      successValue.setText(""+tag.getRenewCount());
 	      //System.out.println(tag.toLongString());
 	      System.out.println();
 	    }
