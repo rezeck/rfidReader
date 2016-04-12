@@ -29,6 +29,8 @@ import javax.swing.JScrollPane;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class RFIDgui implements MessageListener{
 	
@@ -38,6 +40,9 @@ public class RFIDgui implements MessageListener{
 	private AlienClass1Reader reader = new AlienClass1Reader();
 	private MessageListenerService service = new MessageListenerService(4000);
 	String listTag[] = new String[]{};
+	
+	JLabel readValue = new JLabel("0");
+	JLabel successValue = new JLabel("0");
 
 	/**
 	 * Launch the application.
@@ -61,7 +66,7 @@ public class RFIDgui implements MessageListener{
 	public RFIDgui() throws AlienReaderException, Exception{
 		InetAddress localHost = Inet4Address.getLocalHost();
 		this.ipAddress = localHost.getHostName();
-
+		System.out.println(this.ipAddress);
 		alienReaderInitialize();
 		initialize();
 	}
@@ -82,7 +87,7 @@ public class RFIDgui implements MessageListener{
 	      Tag tag = message.getTag(i);
 	      listTag[i] = tag.toLongString() + "ok";
 	      System.out.println("Read rate: " + tag.getRenewCount() + "/sec");
-	      //System.out.println(tag.toLongString());
+	      System.out.println(tag.toLongString());
 	      System.out.println();
 	    }
 	  }
@@ -165,14 +170,14 @@ public class RFIDgui implements MessageListener{
 		btnReadOnce.setBounds(12, 20, 300, 25);
 		frame.getContentPane().add(btnReadOnce);
 		
-		scrollPane.setBounds(12, 57, 300, 382);
+		scrollPane.setBounds(12, 57, 300, 344);
 		frame.getContentPane().add(scrollPane);
 		
 		scrollPane.setViewportView(listRFIDSingle);
 		listRFIDSingle.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		
-		scrollPane_1.setBounds(326, 57, 300, 382);
+		scrollPane_1.setBounds(326, 57, 300, 344);
 		frame.getContentPane().add(scrollPane_1);
 		
 		
@@ -227,6 +232,26 @@ public class RFIDgui implements MessageListener{
 		});
 		btnReadAutonomous.setBounds(326, 20, 300, 25);
 		frame.getContentPane().add(btnReadAutonomous);
+		
+		JLabel lblReadRate = new JLabel("Read rate: ");
+		lblReadRate.setForeground(Color.WHITE);
+		lblReadRate.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblReadRate.setBounds(326, 413, 87, 15);
+		frame.getContentPane().add(lblReadRate);
+		
+		JLabel lblSuccessRate = new JLabel("Success rate: ");
+		lblSuccessRate.setForeground(Color.WHITE);
+		lblSuccessRate.setFont(new Font("Dialog", Font.BOLD, 12));
+		lblSuccessRate.setBounds(326, 431, 114, 15);
+		frame.getContentPane().add(lblSuccessRate);
+		
+		readValue.setForeground(Color.WHITE);
+		readValue.setBounds(446, 413, 70, 15);
+		frame.getContentPane().add(readValue);
+		
+		successValue.setForeground(Color.WHITE);
+		successValue.setBounds(446, 431, 70, 15);
+		frame.getContentPane().add(successValue);
 		
 		/*
 		listRFIDSingle.addMouseListener(new MouseAdapter() {
