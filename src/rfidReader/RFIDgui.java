@@ -87,7 +87,8 @@ public class RFIDgui implements MessageListener{
 	      Tag tag = message.getTag(i);
 	      listTag[i] = tag.toLongString() + "ok";
 	      System.out.println("Read rate: " + tag.getRenewCount() + "/sec");
-	      System.out.println(tag.toLongString());
+	      readValue.setText(""+tag.getRenewCount());
+	      //System.out.println(tag.toLongString());
 	      System.out.println();
 	    }
 	  }
@@ -194,6 +195,7 @@ public class RFIDgui implements MessageListener{
 
 						// Setup with your ip address
 						reader.setNotifyAddress(ipAddress, 4000);
+						reader.setNotifyAddress("150.164.200.254", 4000);
 						reader.setNotifyFormat(AlienClass1Reader.XML_FORMAT); // Make sure service can decode it.
 						reader.setNotifyTrigger("TrueFalse"); // Notify whether there's a tag or not
 						reader.setNotifyMode(AlienClass1Reader.ON);
