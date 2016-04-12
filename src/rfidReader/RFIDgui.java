@@ -65,7 +65,7 @@ public class RFIDgui implements MessageListener{
 	 */
 	public RFIDgui() throws AlienReaderException, Exception{
 		InetAddress localHost = Inet4Address.getLocalHost();
-		this.ipAddress = localHost.getHostName();
+		this.ipAddress = localHost.getHostAddress();
 		System.out.println(this.ipAddress);
 		alienReaderInitialize();
 		initialize();
