@@ -1,4 +1,4 @@
-package rfidReader;
+package br.ufmg.dcc.dcc831.rfidReader;
 
 import com.alien.enterpriseRFID.reader.*;
 import com.alien.enterpriseRFID.tags.*;
@@ -98,7 +98,7 @@ public void messageReceived(Message message){
 /**
  * Main
  */
-public static final void main(String args[]){
+public static final void mainn(String args[]){
   try {
     new MessageListenerTest();
   } catch (Exception e) {
