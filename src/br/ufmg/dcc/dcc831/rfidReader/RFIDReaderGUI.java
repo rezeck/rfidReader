@@ -18,7 +18,7 @@ import javax.swing.UIManager;
 import com.alien.enterpriseRFID.reader.AlienClass1Reader;
 import com.alien.enterpriseRFID.reader.AlienReaderException;
 
-public class RFIDReaderGUI {
+public class RFIDReaderGUI extends JFrame{
 	
 	private static RFIDReaderGUI instance;
 	
@@ -106,6 +106,7 @@ public class RFIDReaderGUI {
 					successRate = singleModeTester.getSucessRate();
 					for (Map.Entry<String, Integer> entry : successRate.entrySet()){
 						System.out.println(entry.getValue() + "% of Success Rate for " + entry.getKey());
+						
 					}					
 				} catch (AlienReaderException e1) {
 					e1.printStackTrace();

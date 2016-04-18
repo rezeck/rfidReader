@@ -4,6 +4,6 @@ import com.alien.enterpriseRFID.reader.AlienReaderException;
 
 public class Main {
 	public static void main(String args[]) throws AlienReaderException{
-		RFIDReaderGUI.getInstance();
+		RFIDGUI.getInstance();
 	}
 }
