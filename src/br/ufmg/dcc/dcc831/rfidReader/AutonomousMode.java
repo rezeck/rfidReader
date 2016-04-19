@@ -7,6 +7,8 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
+import javax.swing.JList;
+
 import com.alien.enterpriseRFID.notify.Message;
 import com.alien.enterpriseRFID.notify.MessageListener;
 import com.alien.enterpriseRFID.notify.MessageListenerService;
@@ -51,11 +53,15 @@ public class AutonomousMode implements MessageListener{
 	@Override
 	public void messageReceived(Message message) {
 		System.out.println("Uma leitura foi recebida...");
+		RFIDGUI gui = RFIDGUI.getInstance();
+		JList<String> list = gui.getListTagsAutonomous();
 		Tag[] tagList = message.getTagList();
+		String[] tagListString = new String[tagList.length];
 		for (int i = 0; i < tagList.length; i++){
+			tagListString[i] = tagList[i].getTagID();
 			System.out.println(tagList[i].getTagID());
 		}
-		
+		list.setListData(tagListString);
 	}
 	
 	public void startRead() throws IOException, AlienReaderException{

@@ -108,6 +108,10 @@ public class RFIDGUI extends JFrame {
 		scrollPaneTagsAutonomous.setViewportView(listTagsAutonomous);
 	}
 	
+	public JList<String> getListTagsAutonomous(){
+		return listTagsAutonomous;
+	}
+	
 	public static RFIDGUI getInstance(){
 		if (instance == null)
 			instance = new RFIDGUI();
