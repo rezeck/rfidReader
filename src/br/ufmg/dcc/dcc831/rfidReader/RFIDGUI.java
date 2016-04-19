@@ -58,13 +58,16 @@ public class RFIDGUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				AlienClass1Reader reader = Reader.getReaderInstanceInitialized();
 				SingleMode singleModeTester = new SingleMode(reader);
-				Map<String, Integer> successRate;
+				Map<String, Integer> successRate, readRate;
 				try {
 					successRate = singleModeTester.getSucessRate();
+					readRate = singleModeTester.getReadRate();
+					
 					Vector<String> output = new Vector<String>();
 					for (Map.Entry<String, Integer> entry : successRate.entrySet()){
 						System.out.println(entry.getValue() + "% of Success Rate for " + entry.getKey());
-						output.addElement(entry.getValue() + "% of Success Rate for " + entry.getKey());
+						
+						output.addElement(readRate.get(entry.getKey())/5 + " Read Rate, " + entry.getValue() + "% of Success Rate for " + entry.getKey());
 					}
 					listTagsSingle.setListData(output.toArray(new String[output.size()]));
 				} catch (AlienReaderException e1) {

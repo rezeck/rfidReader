@@ -58,8 +58,8 @@ public class AutonomousMode implements MessageListener{
 		Tag[] tagList = message.getTagList();
 		String[] tagListString = new String[tagList.length];
 		for (int i = 0; i < tagList.length; i++){
-			tagListString[i] = tagList[i].getTagID();
-			System.out.println(tagList[i].getTagID());
+			tagListString[i] = tagList[i].getTagID() + " Read Rate: " + tagList[i].getRenewCount();
+			System.out.println(tagList[i].getTagID() + " Read Rate: " + tagList[i].getRenewCount());
 		}
 		list.setListData(tagListString);
 	}

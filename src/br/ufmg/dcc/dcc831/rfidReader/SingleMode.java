@@ -21,10 +21,12 @@ public class SingleMode {
 	
 	public Map<String, Integer> getSucessRate() throws AlienReaderException{
 		int readAttempts = 20;
+		System.out.println(reader.getAddress());
 		reader.open();
+		
 		Map<String, Integer> counter = new HashMap<String, Integer>();
 		for (int m = 0; m < readAttempts; m++){
-			Tag[] tagList = reader.getTagList();
+			Tag[] tagList = reader.getTagList();	
 			for (int i = 0; i < tagList.length; i++){
 				Tag tag = tagList[i];
 				int oldCounter = 0;
@@ -43,6 +45,26 @@ public class SingleMode {
 		}
 		reader.close();
 		
+		return counter;
+	}
+	
+	public Map<String, Integer> getReadRate() throws AlienReaderException{
+		
+		reader.open();
+		Map<String, Integer> counter = new HashMap<String, Integer>();
+		
+		long start = System.currentTimeMillis();
+		while(System.currentTimeMillis() - start <= 5000){
+			Tag[] tagList = reader.getTagList();
+			for (int i = 0; i < tagList.length; i++){
+				Tag tag = tagList[i];
+				int oldCounter = 0;
+				if (counter.containsKey(tag.getTagID()))
+					oldCounter = counter.get(tag.getTagID());
+				counter.put(tag.getTagID(), oldCounter + 1);
+			}
+		}
+		reader.close();
 		return counter;
 	}
 	
